@@ -21,6 +21,10 @@ function Calculator() {
         setCurrentNum('');
     }
 
+    const calculateResult = (prevNum, curNum, operator) => {
+        
+    }
+
     return(
         <div className="wrapper-calculator">
             <div className="calculator calculator-style">
