@@ -19,10 +19,10 @@ function ButtonsPad(props) {
                 <button id="percent" value="%" onClick={props.handlerOperators}> 
                     % 
                 </button>
-                <button id="clear" value="C" onClick={props.handlerOperators}> 
+                <button id="clear" value="C" onClick={props.clearAll}> 
                     C 
                 </button>
-                <button id="clear-element" value="CE" onClick={props.handlerOperators}> 
+                <button id="clear-element" value="CE" onClick={props.clearCurrentNumer}> 
                     CE 
                 </button>
             </div>
@@ -62,7 +62,7 @@ function ButtonsPad(props) {
                 <button id="zero" value="0" onClick={props.handlerPressButton}>
                     0
                 </button>
-                <button id="equals" value="=" onClick={() => props.calculateResult()}>
+                <button id="equals" value="=" onClick={props.calculateResult}>
                     =
                 </button>
             </div>

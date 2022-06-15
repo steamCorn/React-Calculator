@@ -5,58 +5,122 @@ import './styles/calculator.css';
 
 function Calculator() {
 
-    const [previousNum, setPreviousNum] = useState('');
+//     const [previousNum, setPreviousNum] = useState('');
+//     const [currentNum, setCurrentNum] = useState('');
+//     const [result, setResult] = useState('');
+//     const [operator, setOperator] = useState('');
+
+//     const handlerPressButton = (e) => {
+//         setCurrentNum(Number(currentNum + e.target.value));
+//     }
+
+//     const handlerOperators = (e) => {
+//         setOperator(e.target.value);
+//         setPreviousNum(currentNum);
+//         setCurrentNum('');
+//     }
+
+//     const validationEnteredNumber = (num) => {
+
+//     }
+
+// // console.log(typeof currentNum);
+// // console.log(typeof previousNum);
+
+//     const calculateResult = () => {
+//         switch (operator){
+//             case '+':
+//                 setResult(previousNum + currentNum);
+//                 break;
+//             case '-':
+//                 setResult(previousNum - currentNum);
+//                 break;
+//             case '*':
+//                 setResult(previousNum * currentNum);
+//                 break;
+//             case '/':
+//                 setResult(previousNum / currentNum);
+//                 break;
+//             default:
+//                 setResult(currentNum);    
+//         }
+//         return result;
+//     }
+
+//     const clearAll = () => {
+//         setResult('');
+//         setOperator('');
+//         setPreviousNum('');
+//         setCurrentNum('');
+//     }
+
+//     const clearCurrentNumer = () => {
+//         setCurrentNum('0');
+//     }
+
+    
     const [currentNum, setCurrentNum] = useState('');
     const [result, setResult] = useState('');
     const [operator, setOperator] = useState('');
 
     const handlerPressButton = (e) => {
-        setCurrentNum(currentNum + e.target.value);
+        setCurrentNum(Number(currentNum + e.target.value));
     }
+
     const handlerOperators = (e) => {
         setOperator(e.target.value);
-        setPreviousNum(currentNum);
+        setResult(currentNum);
         setCurrentNum('');
     }
 
-    console.log("previousNum : " + previousNum);
-    console.log("currentNum : " + currentNum);
-    console.log("operator : " + operator);
-    console.log("result : " + result);
+    const validationEnteredNumber = (num) => {
+
+    }
 
     const calculateResult = () => {
         switch (operator){
             case '+':
-                setResult(previousNum + currentNum);
+                setResult(result + currentNum);
                 break;
             case '-':
-                setResult(previousNum - currentNum);
+                setResult(result - currentNum);
                 break;
             case '*':
-                setResult(previousNum * currentNum);
+                setResult(result * currentNum);
                 break;
             case '/':
-                setResult(previousNum + currentNum);
+                setResult(result / currentNum);
                 break;
             default:
-                setResult(0);    
+                setResult(currentNum);    
         }
         return result;
+    }
+
+    const clearAll = () => {
+        setResult('');
+        setOperator('');
+        setCurrentNum('');
+    }
+
+    const clearCurrentNumer = () => {
+        setCurrentNum('0');
     }
 
     return(
         <div className="wrapper-calculator">
             <div className="calculator calculator-style">
                 <DisplayCalc 
-                    operator={operator}
                     currentNum={currentNum}
-                    previousNum = {previousNum}
+                    // previousNum = {previousNum}
                     result={result}
                 />
                 <ButtonsPad 
                     handlerPressButton = {handlerPressButton}
                     handlerOperators = {handlerOperators}
                     calculateResult = {calculateResult}
+                    clearAll = {clearAll}
+                    clearCurrentNumer = {clearCurrentNumer}
                 />
             </div>
         </div>
