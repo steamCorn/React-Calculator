@@ -62,7 +62,7 @@ function ButtonsPad(props) {
                 <button id="zero" value="0" onClick={props.handlerPressButton}>
                     0
                 </button>
-                <button id="equals" value="=" onClick={props.handlerPressButton}>
+                <button id="equals" value="=" onClick={() => props.calculateResult()}>
                     =
                 </button>
             </div>

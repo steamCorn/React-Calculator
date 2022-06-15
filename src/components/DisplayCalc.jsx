@@ -5,7 +5,7 @@ export default function DisplayCalc(props) {
     return(
         <div>
             <div id="display">
-                {props.currentNum || props.previousNum || '0'}
+                {props.result || props.currentNum || props.previousNum || '0'}
             </div>
         </div>
     )

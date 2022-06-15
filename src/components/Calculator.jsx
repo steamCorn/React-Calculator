@@ -7,22 +7,41 @@ function Calculator() {
 
     const [previousNum, setPreviousNum] = useState('');
     const [currentNum, setCurrentNum] = useState('');
-    const [result, setResult] = useState(0);
+    const [result, setResult] = useState('');
     const [operator, setOperator] = useState('');
 
     const handlerPressButton = (e) => {
-        setCurrentNum(currentNum + e.target.value)
-        console.log(e.target.value);
+        setCurrentNum(currentNum + e.target.value);
     }
     const handlerOperators = (e) => {
-        console.log(e.target.value);
         setOperator(e.target.value);
         setPreviousNum(currentNum);
         setCurrentNum('');
     }
 
-    const calculateResult = (prevNum, curNum, operator) => {
-        
+    console.log("previousNum : " + previousNum);
+    console.log("currentNum : " + currentNum);
+    console.log("operator : " + operator);
+    console.log("result : " + result);
+
+    const calculateResult = () => {
+        switch (operator){
+            case '+':
+                setResult(previousNum + currentNum);
+                break;
+            case '-':
+                setResult(previousNum - currentNum);
+                break;
+            case '*':
+                setResult(previousNum * currentNum);
+                break;
+            case '/':
+                setResult(previousNum + currentNum);
+                break;
+            default:
+                setResult(0);    
+        }
+        return result;
     }
 
     return(
@@ -32,10 +51,12 @@ function Calculator() {
                     operator={operator}
                     currentNum={currentNum}
                     previousNum = {previousNum}
+                    result={result}
                 />
                 <ButtonsPad 
                     handlerPressButton = {handlerPressButton}
                     handlerOperators = {handlerOperators}
+                    calculateResult = {calculateResult}
                 />
             </div>
         </div>
