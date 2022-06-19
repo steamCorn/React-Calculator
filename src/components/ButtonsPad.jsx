@@ -4,19 +4,19 @@ function ButtonsPad(props) {
     return(
         <div className="buttons-pad-calculator">
             <div className="operators">
-                <button id="add" value="+" onClick={props.handlerOperators}>
+                <button id="add" value="+" onClick={props.handlerOperands}>
                     +
                 </button>
-                <button id="subtract" value="-" onClick={props.handlerOperators}>
+                <button id="subtract" value="-" onClick={props.handlerOperands}>
                     -
                 </button>
-                <button id="multiply" value="*" onClick={props.handlerOperators}> 
+                <button id="multiply" value="*" onClick={props.handlerOperands}> 
                     * 
                 </button>
-                <button id="divide" value="/" onClick={props.handlerOperators}> 
+                <button id="divide" value="/" onClick={props.handlerOperands}> 
                     / 
                 </button>
-                <button id="percent" value="%" onClick={props.handlerOperators}> 
+                <button id="percent" value="%" onClick={props.handlerOperands}> 
                     % 
                 </button>
                 <button id="clear" value="C" onClick={props.clearAll}> 
@@ -62,7 +62,7 @@ function ButtonsPad(props) {
                 <button id="zero" value="0" onClick={props.handlerPressButton}>
                     0
                 </button>
-                <button id="equals" value="=" onClick={props.calculateResult}>
+                <button id="equals" value="=" onClick={props.handlerEqual}>
                     =
                 </button>
             </div>

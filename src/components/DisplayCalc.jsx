@@ -2,10 +2,31 @@ import React from "react";
 
 export default function DisplayCalc(props) {
 
+    let topDisplay;
+    let bottomDisplay;
+
+    if(props.result && !props.equalPressed) {
+        topDisplay = props.result + '  ' + props.operand; 
+        bottomDisplay = props.result;
+    }
+    else if(props.equalPressed) {
+        topDisplay = props.previousNum + '  ' + props.operand + '  ' + props.currentNum + '  ' + '=';
+        bottomDisplay = props.result;
+    }
+    else if(props.operand) {
+        topDisplay = props.previousNum + '  ' + props.operand;
+        bottomDisplay = props.currentNum;
+    }
+
     return(
         <div>
             <div id="display">
-                {props.result || props.currentNum || props.previousNum || '0'}
+                <div className="calculations">
+                    {topDisplay} 
+                </div>
+                <div className="results">
+                    {props.currentNum  || bottomDisplay ||  '0'}
+                </div>
             </div>
         </div>
     )
