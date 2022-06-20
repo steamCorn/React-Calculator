@@ -16,29 +16,48 @@ function Calculator() {
 	const handlerPressButton = (e) => {
 		// setCurrentNum(Number(currentNum + e.target.value)); //add only integers
 
-        if ( e.target.value === '0' && currentNum.length === 0 ) {
-            console.log('Null pressed');
-            setCurrentNum(currentNum);
+        if ( e.target.value === '0') {
+            handlerZero();
+        } 
+        else if (equalPressed) {
+            clearAll();
+            setCurrentNum(e.target.value);
         } else {
         setCurrentNum(currentNum + e.target.value);
         }
 	};
 
+    const handlerZero = () => { 
+        if ( currentNum[0] === '0' && currentNum.length === 0) {
+            console.log('Null pressed');
+            console.log(currentNum.length);
+
+            setCurrentNum(currentNum);
+        } 
+    }
+
 	const handlerOperands = (e) => {
 		if (currentNum.length === 0 && !result) {
 			console.log('there IS NOT currentNum');
+
 			setResult(0);
 			setPreviousNum(0);
 			setOperand(e.target.value);
 		}
-        else if (currentNum && operand ) {
+        else if (!currentNum) {
+			console.log('there IS not currentNum, set new operand');
+
+			setOperand(e.target.value);
+		} else if (currentNum && operand ) {
 			console.log('there ARE currentNum, operand and result');
+
 			setResult(calculateResult(result, currentNum, operand));
 			setPreviousNum(calculateResult(result, currentNum, operand));
 			setCurrentNum('');
 			setOperand(e.target.value);
 		} else {
 			console.log('there is NOT previous operand');
+
 			setPreviousNum(currentNum);
 			setResult(currentNum);
 			setOperand(e.target.value);
@@ -47,11 +66,12 @@ function Calculator() {
 	};
 
     const handlerDot = () => {
-        console.log('DOT is pressed');
-        if( currentNum.length === 0){
+        if( !currentNum){
             setCurrentNum('0.');
-        }
-        else if( currentNum.toString().includes('.')){
+        } else if( currentNum.toString().includes('.')){
+            setCurrentNum(currentNum);
+        } else if(equalPressed){
+            clearAll();
             setCurrentNum(currentNum);
         } else {
             setCurrentNum(currentNum + '.')
@@ -59,9 +79,7 @@ function Calculator() {
     }
 
 	const handlerEqual = () => {
-		console.log('equal was pressed!');
-		console.log(equalPressed);
-		setEqualPressed(!equalPressed);
+        setEqualPressed(true);
 		setResult(calculateResult(result, currentNum, operand));
 	};
 
@@ -77,14 +95,14 @@ function Calculator() {
 		setCurrentNum('0');
 	};
 
-    console.log(currentNum);
-    console.log(currentNum.length);
-    console.log(typeof currentNum);
+    
+    // console.log(result);
+    // console.log(typeof result);
 
 	// console.group();
-	// console.log('previousNum   ' + typeof previousNum);
-	// console.log('currentNum  ' + typeof currentNum);
-	// console.log('result  ' + typeof result);
+	// console.log('previousNum   ' +  previousNum);
+	// console.log('currentNum  ' + currentNum);
+	// console.log('result  ' + result);
 	// console.log('operand  ' + operand);
 	// console.log('equalPressed  ' + equalPressed);
 	// console.groupEnd();

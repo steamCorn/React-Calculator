@@ -1,4 +1,6 @@
-function calculateResult(A, B, mathOperand) {
+function calculateResult(a, b, mathOperand) {
+	let A = Number(a);
+	let B = Number(b);
 	let total = 0;
 	switch (mathOperand) {
 		case '+':
