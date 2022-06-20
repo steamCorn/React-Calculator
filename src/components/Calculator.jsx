@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import DisplayCalc from './DisplayCalc';
 import ButtonsPad from './ButtonsPad';
 
+import calculateResult from '../utils/counterUtils';
+
 import './styles/calculator.css';
 
 function Calculator() {
@@ -18,41 +20,28 @@ function Calculator() {
 
     const handlerOperands = (e) => {
 
-        // setResult(previousNum);
-
         if(!operand){
-            console.log("there is NOT operand");
+            console.log("there is NOT previous operand");
+            setPreviousNum(currentNum);
             setResult(currentNum);
             setOperand(e.target.value);
             setCurrentNum('');
         }
         else if(currentNum && operand && result){
             console.log("there ARE currentNum, operand and result");
-            calculateResult(result, currentNum, operand);
+            setResult(calculateResult(result, currentNum, operand));
+            setPreviousNum(calculateResult(result, currentNum, operand));
             setCurrentNum('');
             setOperand(e.target.value);
         }
-        // else if(operand){
-        //     console.log("there IS operand");
-        //     setPreviousNum(calculateResult(previousNum, currentNum, operand));
-        //     setOperand(e.target.value);
-        //     setCurrentNum('');
-            
-        // }
-        // else {
-        //     console.log("another way");
-        //     setOperand(e.target.value);
-        //     setPreviousNum(currentNum);
-        //     // setResult(previousNum);
-        //     setCurrentNum('');
-        // }
     }
 
     const handlerEqual = () => {
-        calculateResult(result, currentNum, operand);
-        setEqualPressed(true);
+        console.log("equal was pressed!");
+        console.log(equalPressed);
+        setEqualPressed(!equalPressed);
+        setResult(calculateResult(result, currentNum, operand));
     }
-
 
     const clearAll = () => {
         setResult('');
@@ -65,27 +54,7 @@ function Calculator() {
     const clearCurrentNumer = () => {
         setCurrentNum('0');
     }
-
-    const calculateResult = (A, B, mathOperand) => {
-        switch (mathOperand){
-            case '+':
-                setResult(A + B);
-                break;
-            case '-':
-                setResult(A - B);
-                break;
-            case '*':
-                setResult(A * B);
-                break;
-            case '/':
-                setResult(A / B);
-                break;
-            default:
-                setResult(B);    
-        }
-        return result;
-    }
-
+    
     console.group();
     console.log("previousNum   " + previousNum);
     console.log('currentNum  ' + currentNum);

@@ -7,13 +7,14 @@ export default function DisplayCalc(props) {
 
     if(props.result && !props.equalPressed) {
         topDisplay = props.result + '  ' + props.operand; 
-        bottomDisplay = props.result;
+        bottomDisplay = props.currentNum || props.result;
     }
     else if(props.equalPressed) {
+        console.log(props.equalPressed);
         topDisplay = props.previousNum + '  ' + props.operand + '  ' + props.currentNum + '  ' + '=';
         bottomDisplay = props.result;
     }
-    else if(props.operand) {
+    else {
         topDisplay = props.previousNum + '  ' + props.operand;
         bottomDisplay = props.currentNum;
     }
@@ -25,7 +26,8 @@ export default function DisplayCalc(props) {
                     {topDisplay} 
                 </div>
                 <div className="results">
-                    {props.currentNum  || bottomDisplay ||  '0'}
+                    {bottomDisplay ||  '0'}
+                    {/* {props.currentNum  || bottomDisplay ||  '0'} */}
                 </div>
             </div>
         </div>
