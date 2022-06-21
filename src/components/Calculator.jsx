@@ -7,17 +7,17 @@ import calculateResult from '../utils/counterUtils';
 import './styles/calculator.css';
 
 function Calculator() {
-	const [previousNum, setPreviousNum] = useState(0);
-	const [currentNum, setCurrentNum] = useState(0);
-	const [result, setResult] = useState(0);
+	const [previousNum, setPreviousNum] = useState('');
+	const [currentNum, setCurrentNum] = useState('');
+	const [result, setResult] = useState('');
 	const [operand, setOperand] = useState('');
 	const [equalPressed, setEqualPressed] = useState(false);
 
 	const clearAll = () => {
-		setResult(0);
+		setResult('');
 		setOperand('');
-		setPreviousNum(0);
-		setCurrentNum(0);
+		setPreviousNum('');
+		setCurrentNum('');
 		setEqualPressed(false);
 	};
 
