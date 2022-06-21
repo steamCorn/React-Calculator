@@ -7,11 +7,19 @@ import calculateResult from '../utils/counterUtils';
 import './styles/calculator.css';
 
 function Calculator() {
-	const [previousNum, setPreviousNum] = useState('');
-	const [currentNum, setCurrentNum] = useState('');
-	const [result, setResult] = useState('');
+	const [previousNum, setPreviousNum] = useState(0);
+	const [currentNum, setCurrentNum] = useState(0);
+	const [result, setResult] = useState(0);
 	const [operand, setOperand] = useState('');
 	const [equalPressed, setEqualPressed] = useState(false);
+
+	const clearAll = () => {
+		setResult(0);
+		setOperand('');
+		setPreviousNum(0);
+		setCurrentNum(0);
+		setEqualPressed(false);
+	};
 
 	const handlerPressButton = (e) => {
 		// setCurrentNum(Number(currentNum + e.target.value)); //add only integers
@@ -83,13 +91,7 @@ function Calculator() {
 		setResult(calculateResult(result, currentNum, operand));
 	};
 
-	const clearAll = () => {
-		setResult('');
-		setOperand('');
-		setPreviousNum('');
-		setCurrentNum('');
-		setEqualPressed(false);
-	};
+
 
 	const clearCurrentNumer = () => {
 		setCurrentNum('0');

@@ -4,18 +4,35 @@ export default function DisplayCalc(props) {
 	let topDisplay;
 	let bottomDisplay;
 
-	if (props.result && !props.equalPressed) {
-	topDisplay = props.result + "  " + props.operand;
-	bottomDisplay = props.currentNum || props.result;
+	// if (props.result && !props.equalPressed) {
+	// 	topDisplay = props.result + "  " + props.operand;
+	// 	bottomDisplay = props.currentNum || props.result;
+	// } else if (props.equalPressed) {
+
+	// 	console.log(props.equalPressed);
+
+	// 	topDisplay = props.previousNum + "  " + props.operand + "  " + props.currentNum + "  " + "=";
+	// 	bottomDisplay = props.result;
+	// } else {
+	// 	topDisplay = props.previousNum + "  " + props.operand;
+	// 	bottomDisplay = props.currentNum;
+	// }
+
+	if (props.result === 0 && !props.equalPressed) {
+		// topDisplay = `${props.result} ${props.operand}`;
+		bottomDisplay = `${props.currentNum}` || `${props.result}`;
+	} else if (props.result && !props.equalPressed) {
+		topDisplay = `${props.result} ${props.operand}`;
+		bottomDisplay = `${props.currentNum}` || `${props.result}`;
 	} else if (props.equalPressed) {
 
-	console.log(props.equalPressed);
+		console.log(props.equalPressed);
 
-	topDisplay = props.previousNum + "  " + props.operand + "  " + props.currentNum + "  " + "=";
-	bottomDisplay = props.result;
+		topDisplay = `${props.previousNum} ${props.operand} ${props.currentNum} = `;
+		bottomDisplay = `${props.result}`;
 	} else {
-	topDisplay = props.previousNum + "  " + props.operand;
-	bottomDisplay = props.currentNum;
+		topDisplay = `${props.previousNum} ${props.operand}`;
+		bottomDisplay = `${props.currentNum}`;
 	}
 
 	return (
