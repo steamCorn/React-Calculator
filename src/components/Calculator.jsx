@@ -7,69 +7,75 @@ import calculateResult from '../utils/counterUtils';
 import './styles/calculator.css';
 
 function Calculator() {
-	const [previousNum, setPreviousNum] = useState('');
-	const [currentNum, setCurrentNum] = useState('');
-	const [result, setResult] = useState('');
+	const [previousNum, setPreviousNum] = useState(0);
+	const [currentNum, setCurrentNum] = useState(0);
+	const [result, setResult] = useState(0);
 	const [operand, setOperand] = useState('');
 	const [equalPressed, setEqualPressed] = useState(false);
 
 	const clearAll = () => {
-		setResult('');
+		setPreviousNum(0);
+		setCurrentNum(0);
+		setResult(0);
 		setOperand('');
-		setPreviousNum('');
-		setCurrentNum('');
 		setEqualPressed(false);
 	};
 
 	const handlerPressButton = (e) => {
-		// setCurrentNum(Number(currentNum + e.target.value)); //add only integers
 
-        if ( e.target.value === '0') {
-            handlerZero();
-        } 
-        else if (equalPressed) {
+		if ( e.target.value === '0' && currentNum === 0) {
+			console.log('handlerPressButton 1 condition');
+			setCurrentNum(currentNum);       
+        } else if (equalPressed && currentNum === 0) {
+			console.log('handlerPressButton 2 condition');
+
+        } else if (currentNum === 0) {
+			console.log('handlerPressButton 3 condition');
+            setCurrentNum(e.target.value);
+        } else if (equalPressed) {
+			console.log('handlerPressButton 4 condition');
             clearAll();
             setCurrentNum(e.target.value);
         } else {
         setCurrentNum(currentNum + e.target.value);
         }
+
 	};
 
-    const handlerZero = () => { 
-        if ( currentNum[0] === '0' && currentNum.length === 0) {
-            console.log('Null pressed');
-            console.log(currentNum.length);
-
-            setCurrentNum(currentNum);
-        } 
-    }
-
 	const handlerOperands = (e) => {
-		if (currentNum.length === 0 && !result) {
-			console.log('there IS NOT currentNum');
-
+		if (currentNum === 0 && !result) {
+			console.log('handlerOperands 1 condition');
 			setResult(0);
 			setPreviousNum(0);
 			setOperand(e.target.value);
 		}
         else if (!currentNum) {
-			console.log('there IS not currentNum, set new operand');
-
+			console.log('handlerOperands 2 condition');
 			setOperand(e.target.value);
-		} else if (currentNum && operand ) {
-			console.log('there ARE currentNum, operand and result');
-
+		}  
+		else if (currentNum && operand && !equalPressed) {
+			console.log('handlerOperands 3 condition');
 			setResult(calculateResult(result, currentNum, operand));
 			setPreviousNum(calculateResult(result, currentNum, operand));
-			setCurrentNum('');
+			setCurrentNum(0);
 			setOperand(e.target.value);
-		} else {
-			console.log('there is NOT previous operand');
+		} 
+		else if (equalPressed) {
+			console.log('handlerOperands 4 condition');
+			setEqualPressed(false);
+			setCurrentNum(0);
+			setOperand(e.target.value);
 
+			setPreviousNum(result);
+			setResult(result);
+
+		}
+		else {
+			console.log('handlerOperands 5 condition');
 			setPreviousNum(currentNum);
 			setResult(currentNum);
 			setOperand(e.target.value);
-			setCurrentNum('');
+			setCurrentNum(0);
 		}
 	};
 
@@ -80,18 +86,30 @@ function Calculator() {
             setCurrentNum(currentNum);
         } else if(equalPressed){
             clearAll();
-            setCurrentNum(currentNum);
+            setCurrentNum('0.');
         } else {
             setCurrentNum(currentNum + '.')
         }
     }
 
+
 	const handlerEqual = () => {
-        setEqualPressed(true);
-		setResult(calculateResult(result, currentNum, operand));
+		if(previousNum === 0 && !operand){
+			console.log('Equal 1 condition');
+			setEqualPressed(true);
+			setResult(currentNum);
+		}
+		else if(equalPressed){
+			console.log('Equal 2 condition');
+			setPreviousNum(result);
+			setResult(calculateResult(result, currentNum, operand));
+		}
+		else {
+			console.log('Equal 3 condition');
+			setEqualPressed(true);
+			setResult(calculateResult(result, currentNum, operand));
+		}
 	};
-
-
 
 	const clearCurrentNumer = () => {
 		setCurrentNum('0');

@@ -22,11 +22,7 @@ function ButtonsPad(props) {
 				<button id="clear" value="C" onClick={props.clearAll}>
 					C
 				</button>
-				<button
-					id="clear-element"
-					value="CE"
-					onClick={props.clearCurrentNumer}
-				>
+				<button id="clear-element" value="CE" onClick={props.clearCurrentNumer}>
 					CE
 				</button>
 			</div>
