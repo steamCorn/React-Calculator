@@ -5,32 +5,40 @@ export default function DisplayCalc(props) {
 	let bottomDisplay;
 
 
-	if (props.result === 0 && !props.equalPressed && !props.operand) {
-		// topDisplay = `${props.result} ${props.operand}`;
+	if (!props.result && !props.equalPressed && !props.operand) {
+		topDisplay = false;
 		console.log("1 condition");
 		bottomDisplay = `${props.currentNum}` || `${props.result}`;
 	}
-	// else if (props.currentNum===0 && props.operand && !props.equalPressed) {
+	// else if (!props.currentNum ) {
 	// 	console.log("2 condition");
-	// 	topDisplay = `${props.currentNum} ${props.operand}`;
-	// 	bottomDisplay = `${props.currentNum}`;
-	// } 
-	// else if ( props.currentNum  && props.operand) {
-	// 	console.log("3 condition");
-	// 	topDisplay = `${props.result} ${props.operand}`;
-	// 	bottomDisplay = `${props.currentNum}`;
-	// } 
-	// else if (props.operand ) {
-	// 	console.log("2 condition");
-	// } 
+	// }
+		// else if (props.currentNum===0 && props.operand && !props.equalPressed) {
+		// 	console.log("2 condition");
+		// 	topDisplay = `${props.currentNum} ${props.operand}`;
+		// 	bottomDisplay = `${props.currentNum}`;
+		// } 
+		// else if ( props.currentNum  && props.operand) {
+		// 	console.log("3 condition");
+		// 	topDisplay = `${props.result} ${props.operand}`;
+		// 	bottomDisplay = `${props.currentNum}`;
+		// } 
+		// else if (props.operand ) {
+		// 	console.log("2 condition");
+		// } 
 	else if (props.equalPressed && !props.operand) {
-		console.log("4 condition");
-		topDisplay = `${props.currentNum} = `;
-		bottomDisplay = `${props.result}`;
+		console.log("3 condition");
+		topDisplay = `${props.result} = `;
+		bottomDisplay = `${props.currentNum}`;
 	}
 	else if (props.equalPressed) {
-		console.log("5 condition");
+		console.log("4 condition");
 		topDisplay = `${props.previousNum} ${props.operand} ${props.currentNum} = `;
+		bottomDisplay = `${props.result}`;
+	}
+	else if (props.result && !props.currentNum) {
+		console.log("5 condition");
+		topDisplay = `${props.result} ${props.operand}`;
 		bottomDisplay = `${props.result}`;
 	}
 	else {
@@ -38,6 +46,26 @@ export default function DisplayCalc(props) {
 		topDisplay = `${props.previousNum} ${props.operand}`;
 		bottomDisplay = `${props.currentNum}`;
 	}
+
+	// if () {
+	// 	console.log("1 condition");
+	// 	bottomDisplay = `${props.currentNum}` || `${props.result}`;
+	// }
+	// else if () {
+	// 	console.log("2 condition");
+	// 	topDisplay = `${props.currentNum} = `;
+	// 	bottomDisplay = `${props.result}`;
+	// }
+	// else if () {
+	// 	console.log("3 condition");
+	// 	topDisplay = `${props.previousNum} ${props.operand} ${props.currentNum} = `;
+	// 	bottomDisplay = `${props.result}`;
+	// }
+	// else {
+	// 	console.log("4 condition");
+	// 	topDisplay = `${props.previousNum} ${props.operand}`;
+	// 	bottomDisplay = `${props.currentNum}`;
+	// }
 
 	return (
 	<div>
@@ -49,7 +77,7 @@ export default function DisplayCalc(props) {
 				{bottomDisplay || "0"}
 			</div> */}
 
-			{bottomDisplay || "0"}
+			{bottomDisplay}
 		</div>
 	</div>
 	);
