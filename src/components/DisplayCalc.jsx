@@ -5,33 +5,17 @@ export default function DisplayCalc(props) {
 	let bottomDisplay;
 
 
-	if (!props.result && !props.equalPressed && !props.operand) {
+	if (!props.result && !props.isEqual && !props.operand) {
 		topDisplay = false;
 		console.log("1 condition");
 		bottomDisplay = `${props.currentNum}` || `${props.result}`;
 	}
-	// else if (!props.currentNum ) {
-	// 	console.log("2 condition");
-	// }
-		// else if (props.currentNum===0 && props.operand && !props.equalPressed) {
-		// 	console.log("2 condition");
-		// 	topDisplay = `${props.currentNum} ${props.operand}`;
-		// 	bottomDisplay = `${props.currentNum}`;
-		// } 
-		// else if ( props.currentNum  && props.operand) {
-		// 	console.log("3 condition");
-		// 	topDisplay = `${props.result} ${props.operand}`;
-		// 	bottomDisplay = `${props.currentNum}`;
-		// } 
-		// else if (props.operand ) {
-		// 	console.log("2 condition");
-		// } 
-	else if (props.equalPressed && !props.operand) {
+	else if (props.isEqual && !props.operand) {
 		console.log("3 condition");
 		topDisplay = `${props.result} = `;
 		bottomDisplay = `${props.currentNum}`;
 	}
-	else if (props.equalPressed) {
+	else if (props.isEqual) {
 		console.log("4 condition");
 		topDisplay = `${props.previousNum} ${props.operand} ${props.currentNum} = `;
 		bottomDisplay = `${props.result}`;
@@ -41,43 +25,26 @@ export default function DisplayCalc(props) {
 		topDisplay = `${props.result} ${props.operand}`;
 		bottomDisplay = `${props.result}`;
 	}
+	// else if (props.isNegative) {
+	// 	console.log("6 condition");
+	// 	topDisplay = `${props.previousNum} ${props.operand} - `;
+	// 	bottomDisplay = `${props.currentNum}`;
+	// }
 	else {
-		console.log("6 condition");
+		console.log("7 condition");
 		topDisplay = `${props.previousNum} ${props.operand}`;
 		bottomDisplay = `${props.currentNum}`;
 	}
 
-	// if () {
-	// 	console.log("1 condition");
-	// 	bottomDisplay = `${props.currentNum}` || `${props.result}`;
-	// }
-	// else if () {
-	// 	console.log("2 condition");
-	// 	topDisplay = `${props.currentNum} = `;
-	// 	bottomDisplay = `${props.result}`;
-	// }
-	// else if () {
-	// 	console.log("3 condition");
-	// 	topDisplay = `${props.previousNum} ${props.operand} ${props.currentNum} = `;
-	// 	bottomDisplay = `${props.result}`;
-	// }
-	// else {
-	// 	console.log("4 condition");
-	// 	topDisplay = `${props.previousNum} ${props.operand}`;
-	// 	bottomDisplay = `${props.currentNum}`;
-	// }
-
 	return (
 	<div>
-		<div id="display">
+		<div className="whole-display">
 			<div className="calculations">
 				{topDisplay}
 			</div>
-			{/* <div className="results">
-				{bottomDisplay || "0"}
-			</div> */}
-
-			{bottomDisplay}
+			<div className="results" id="display">
+				{bottomDisplay}
+			</div>
 		</div>
 	</div>
 	);

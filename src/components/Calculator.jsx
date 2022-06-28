@@ -11,128 +11,154 @@ function Calculator() {
 	const [currentNum, setCurrentNum] = useState(0);
 	const [result, setResult] = useState(0);
 	const [operand, setOperand] = useState('');
-	const [equalPressed, setEqualPressed] = useState(false);
-	const [operPressed, setOperPressed] = useState(false);
-
-	// const arrOperand = ['+', '-', '*', '/'];
+	const [isEqual, setIsEqual] = useState(false);
+	const [isOperator, setIsOperator] = useState(false);
+	const [isNegative, setNegative] = useState(false);
 
 	const clearAll = () => {
 		setPreviousNum(0);
 		setCurrentNum(0);
 		setResult(0);
 		setOperand('');
-		setEqualPressed(false);
-		setOperPressed(false);
+		setIsEqual(false);
+		setIsOperator(false);
+        setNegative(false);
 	};
 
 	const clearCurrentNumer = () => {
-		if(equalPressed){
+		if(isEqual){
 			clearAll();
 		}
 		setCurrentNum(0);
 	};
 
 	const handlerPressButton = (e) => {
+
+		//big problem with 0
+		//when there are cur, pr, eq -> setting 0 works incorrect
 		if ( e.target.value === '0') {
 			if(currentNum==="0." || typeof currentNum === "string"){
-				console.log('PressButton 1 condition');
+				console.log('PressButton 1.0 condition');
 				setCurrentNum(currentNum + e.target.value);
 			} 
 			else if (currentNum === 0) {
-				console.log('PressButton 2 condition');
+				console.log('PressButton 1.1 condition');
 				setCurrentNum(currentNum);
 			}
 			else {
-				console.log('PressButton 3 condition');
+				console.log('PressButton 1.2 condition');
 			}
         } 
 
-		//---- change here
-
-		// else if (currentNum === 0 || previousNum) {
-		// 	console.log('PressButton 8 condition');
-        //     setCurrentNum(e.target.value);
-        // }  
+		else if (isEqual){
+			if(currentNum === 0){
+				console.log('PressButton 1.3 condition');
+				setIsEqual(false);
+				setCurrentNum(e.target.value);
+			} else {
+				console.log('PressButton 1.4 condition');
+				clearAll();
+				setCurrentNum(e.target.value);
+			}
+		}
 		
 		else if (currentNum === 0) {
-			console.log('PressButton 9 condition');
-            setCurrentNum(e.target.value);
+			if(isOperator){
+				console.log('PressButton 1.5 condition');
+				setIsOperator(false);
+				setCurrentNum(e.target.value);
+			} else{
+				console.log('PressButton 1.6 condition');
+				setCurrentNum(e.target.value);
+			}
+			
         } 
 
-		//--------
-
-		
-		// if ( e.target.value === '0' && currentNum === 0 || currentNum==="0.") {
-		// 	console.log('PressButton 1 condition');
-		// 	setCurrentNum(currentNum);       
-        // } 
-
-		
-		// ------ added this for ( 7.001 - 0.002 + ..)
-		else if (operPressed) {
-			console.log('PressButton 4 condition');
-			setOperPressed(false)
-        	setCurrentNum(e.target.value);
-        } 
-
-
-		else if (equalPressed && currentNum === 0) {
-			console.log('PressButton 5 condition');
-			setEqualPressed(false);
+		else if (isOperator) {
+			console.log('PressButton 1.7 condition');
+			setIsOperator(false)
 			setCurrentNum(e.target.value);
+			if (isNegative){
+
+			}
         } 
-		else if (equalPressed) {
-			console.log('PressButton 6 condition');
-            clearAll();
-            setCurrentNum(e.target.value);
-        } else {
-			console.log('PressButton 7 condition')
+
+		else {
+			console.log('PressButton 1.8 condition')
         	setCurrentNum(currentNum + e.target.value);
         }
 	};
 
 	const handlerOperands = (e) => {
-		if (equalPressed) {
-			console.log('handlerOperands 1 condition');
-			setEqualPressed(false);
+		
+		if (isEqual) {
+			console.log('handlerOperands 2.0 condition');
+			setIsOperator(true);
+			setIsEqual(false);
 			setCurrentNum(0);
 			setOperand(e.target.value);
 			setPreviousNum(result);
 			setResult(result);
-			setOperPressed(true)
-		} else if (e.target.value === '%') {
-			console.log('handlerOperands 2 condition');
+			
+		} 
+		else if (e.target.value === '%') {
+			console.log('handlerOperands 2.1 condition');
+			setIsOperator(true);
 			setCurrentNum(currentNum * 0.01);
 		} 
-		// ------ chack here
-		else if (operand  && !result) {
-			console.log('handlerOperands 3 condition');
-			setResult(calculateResult(previousNum, currentNum, operand))
-			setPreviousNum(calculateResult(previousNum, currentNum, operand))
-			setOperand(e.target.value);
-			setCurrentNum(currentNum);
-			setOperPressed(true)
+
+		else if (isOperator) {
+			let isNegativeSign = e.target.value === '-';
+			let isPositive = e.target.value === '+';
+			let isOperandMultiplyOrDevide = operand === '*'|| operand === '/';
+
+			if(isNegativeSign && isOperandMultiplyOrDevide) {
+				console.log('handlerOperands 2.2 condition');
+				setOperand(operand);
+				setNegative(true);
+			}
+			else if (isPositive){
+				setNegative(false);
+				setOperand(e.target.value);
+			}
+            else {
+				console.log('handlerOperands 2.3 condition');
+				setOperand(e.target.value);
+			}
 		}
-		else if (operand) {
-			console.log('handlerOperands 4 condition');
+
+		// else if (operand  && !result) {
+		// 	console.log('handlerOperands 2.6 condition');
+		// 	setIsOperator(true);
+		// 	setResult(calculateResult(previousNum, currentNum, operand))
+		// 	setPreviousNum(calculateResult(previousNum, currentNum, operand))
+		// 	setOperand(e.target.value);
+		// 	setCurrentNum(currentNum);
+		// }
+
+        else if(isNegative){
+            console.log('handlerOperands 2.7 condition');
+            setIsOperator(true);
+			setOperand(e.target.value);
+            setNegative(false);
+            setResult(calculateResult(previousNum, '-'+currentNum, operand));
+            setPreviousNum(calculateResult(previousNum, '-'+currentNum, operand));
+            setCurrentNum(0);
+        }
+        else if (!operand) {
+			console.log('handlerOperands 2.5 condition');
+			setIsOperator(true);
+			setOperand(e.target.value);
+			setPreviousNum(currentNum);
+			setCurrentNum(currentNum);
+		}
+		else {
+            console.log('handlerOperands 2.4 condition');
+			setIsOperator(true);
 			setOperand(e.target.value);
 			setResult(calculateResult(previousNum, currentNum, operand));
 			setPreviousNum(calculateResult(previousNum, currentNum, operand));
-			
-			// ------ check here
 			setCurrentNum(0);
-			setOperPressed(true)
-		}
-		else {
-			console.log('handlerOperands 5 condition');
-			setPreviousNum(currentNum);
-			setOperand(e.target.value);
-
-			// ----- changed code here ---- was --  setCurrentNum(0); 
-			// now: 1 (prN), + , = --- 2(result) and 1(crN) work corecctly
-			// ------ need to retert (0)
-			setCurrentNum(currentNum);
-			setOperPressed(true)
 		}
 	};
 
@@ -143,7 +169,7 @@ function Calculator() {
         } else if( currentNum.toString().includes('.')){
 			console.log('handlerDot 2 condition');
             setCurrentNum(currentNum);
-        } else if(equalPressed){
+        } else if(isEqual){
 			console.log('handlerDot 3 condition');
             clearAll();
             setCurrentNum('0.');
@@ -153,25 +179,33 @@ function Calculator() {
         }
     }
 
+
+
 	const handlerEqual = () => {
 		if(previousNum === 0 && !operand){
 			console.log('Equal 1 condition');
-			setEqualPressed(true);
+			setIsEqual(true);
 			setResult(currentNum);
-		} else if(!result && previousNum){
-			//changes here
+		} 
+		else if(isNegative){
+            console.log('Equal 4 condition');
+            setIsEqual(true);
+            setNegative(false);
+            setResult(calculateResult(previousNum, '-'+currentNum, operand));
+            setCurrentNum('-'+currentNum);
+        }
+        else if(!result && previousNum){
 			console.log('Equal 2 condition');
-			setEqualPressed(true);
+			setIsEqual(true);
 			setOperand(operand);
 			setResult(calculateResult(previousNum, currentNum, operand));
-			//check 
-		} else if(equalPressed){
+		} else if(isEqual){
 			console.log('Equal 3 condition');
 			setPreviousNum(result);
 			setResult(calculateResult(result, currentNum, operand));
 		} else {
-			console.log('Equal 4 condition');
-			setEqualPressed(true);
+			console.log('Equal 5 condition');
+			setIsEqual(true);
 			setResult(calculateResult(previousNum, currentNum, operand));
 		}
 	};
@@ -184,7 +218,8 @@ function Calculator() {
 					currentNum={currentNum}
 					result={result}
 					operand={operand}
-					equalPressed={equalPressed}
+					isEqual={isEqual}
+                    isNegative = {isNegative}
 				/>
 				<ButtonsPad
 					handlerPressButton={handlerPressButton}
