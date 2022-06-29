@@ -18,14 +18,7 @@ function calculateResult(a, b, mathOperand) {
 		default:
 			total = B;
 	}
-	// return total.toPrecision(4);
 	return total;
 }
-
-// function validationResult(num){
-// 	if(num.length > 12){
-// 		return num.toPrecision(10);
-// 	}
-// }
 
 export default calculateResult;
