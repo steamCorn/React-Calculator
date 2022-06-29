@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export default function DisplayCalc(props) {
 	let topDisplay;
@@ -22,15 +22,13 @@ export default function DisplayCalc(props) {
 	}
 
 	return (
-	<div>
-		<div className="whole-display">
-			<div className="calculations">
-				{topDisplay}
-			</div>
-			<div className="results" id="display">
-				{bottomDisplay}
+		<div>
+			<div className="whole-display">
+				<div className="calculations">{topDisplay}</div>
+				<div className="results" id="display">
+					{bottomDisplay}
+				</div>
 			</div>
 		</div>
-	</div>
 	);
 }

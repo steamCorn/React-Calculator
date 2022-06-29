@@ -22,21 +22,19 @@ function Calculator() {
 		setOperand('');
 		setIsEqual(false);
 		setIsOperator(false);
-        setNegative(false);
+		setNegative(false);
 	};
 
 	const clearCurrentNumer = () => {
-		if(isEqual){
+		if (isEqual) {
 			clearAll();
 		}
 		setCurrentNum(0);
 	};
 
 	const handlerPressButton = (e) => {
-
-		if ( e.target.value === '0') {
-			
-			if (currentNum === 0 || currentNum === "0") {
+		if (e.target.value === '0') {
+			if (currentNum === 0 || currentNum === '0') {
 				setCurrentNum(currentNum);
 			} else if (isEqual) {
 				clearAll();
@@ -44,10 +42,8 @@ function Calculator() {
 			} else {
 				setCurrentNum(currentNum + e.target.value);
 			}
-        } 
-
-		else if (isEqual){
-			if(currentNum === 0){
+		} else if (isEqual) {
+			if (currentNum === 0) {
 				setIsEqual(false);
 				setCurrentNum(e.target.value);
 			} else {
@@ -55,26 +51,23 @@ function Calculator() {
 				setCurrentNum(e.target.value);
 			}
 		} else if (currentNum === 0) {
-			if(isOperator){
+			if (isOperator) {
 				setIsOperator(false);
 				setCurrentNum(e.target.value);
-			} else{
+			} else {
 				setCurrentNum(e.target.value);
 			}
-			
-        } else if (isOperator) {
-			setIsOperator(false)
+		} else if (isOperator) {
+			setIsOperator(false);
 			setCurrentNum(e.target.value);
-			if (isNegative){
-
+			if (isNegative) {
 			}
-        } else {
-        	setCurrentNum(currentNum + e.target.value);
-        }
+		} else {
+			setCurrentNum(currentNum + e.target.value);
+		}
 	};
 
 	const handlerOperands = (e) => {
-		
 		if (isEqual) {
 			setIsOperator(true);
 			setIsEqual(false);
@@ -82,34 +75,31 @@ function Calculator() {
 			setOperand(e.target.value);
 			setPreviousNum(result);
 			setResult(result);
-			
 		} else if (e.target.value === '%') {
 			setIsOperator(true);
 			setCurrentNum(currentNum * 0.01);
-		} 
-
-		else if (isOperator) {
+		} else if (isOperator) {
 			let isNegativeSign = e.target.value === '-';
 			let isPositive = e.target.value === '+';
-			let isOperandMultiplyOrDevide = operand === '*'|| operand === '/';
+			let isOperandMultiplyOrDevide = operand === '*' || operand === '/';
 
-			if(isNegativeSign && isOperandMultiplyOrDevide) {
+			if (isNegativeSign && isOperandMultiplyOrDevide) {
 				setOperand(operand);
 				setNegative(true);
-			} else if (isPositive){
+			} else if (isPositive) {
 				setNegative(false);
 				setOperand(e.target.value);
 			} else {
 				setOperand(e.target.value);
 			}
-		} else if(isNegative){
-            setIsOperator(true);
+		} else if (isNegative) {
+			setIsOperator(true);
 			setOperand(e.target.value);
-            setNegative(false);
-            setResult(calculateResult(previousNum, '-'+currentNum, operand));
-            setPreviousNum(calculateResult(previousNum, '-'+currentNum, operand));
-            setCurrentNum(0);
-        } else if (!operand) {
+			setNegative(false);
+			setResult(calculateResult(previousNum, '-' + currentNum, operand));
+			setPreviousNum(calculateResult(previousNum, '-' + currentNum, operand));
+			setCurrentNum(0);
+		} else if (!operand) {
 			setIsOperator(true);
 			setOperand(e.target.value);
 			setPreviousNum(currentNum);
@@ -123,33 +113,33 @@ function Calculator() {
 		}
 	};
 
-    const handlerDot = () => {
-        if( !currentNum){
-            setCurrentNum('0.');
-        } else if( currentNum.toString().includes('.')){
-            setCurrentNum(currentNum);
-        } else if(isEqual){
-            clearAll();
-            setCurrentNum('0.');
-        } else {
-            setCurrentNum(currentNum + '.')
-        }
-    }
+	const handlerDot = () => {
+		if (!currentNum) {
+			setCurrentNum('0.');
+		} else if (currentNum.toString().includes('.')) {
+			setCurrentNum(currentNum);
+		} else if (isEqual) {
+			clearAll();
+			setCurrentNum('0.');
+		} else {
+			setCurrentNum(currentNum + '.');
+		}
+	};
 
 	const handlerEqual = () => {
-		if(previousNum === 0 && !operand){
+		if (previousNum === 0 && !operand) {
 			setIsEqual(true);
 			setResult(currentNum);
-		} else if(isNegative){
-            setIsEqual(true);
-            setNegative(false);
-            setResult(calculateResult(previousNum, '-'+currentNum, operand));
-            setCurrentNum('-'+currentNum);
-        } else if(!result && previousNum){
+		} else if (isNegative) {
+			setIsEqual(true);
+			setNegative(false);
+			setResult(calculateResult(previousNum, '-' + currentNum, operand));
+			setCurrentNum('-' + currentNum);
+		} else if (!result && previousNum) {
 			setIsEqual(true);
 			setOperand(operand);
 			setResult(calculateResult(previousNum, currentNum, operand));
-		} else if(isEqual){
+		} else if (isEqual) {
 			setPreviousNum(result);
 			setResult(calculateResult(result, currentNum, operand));
 		} else {
@@ -167,7 +157,7 @@ function Calculator() {
 					result={result}
 					operand={operand}
 					isEqual={isEqual}
-                    isNegative = {isNegative}
+					isNegative={isNegative}
 				/>
 				<ButtonsPad
 					handlerPressButton={handlerPressButton}
@@ -175,7 +165,7 @@ function Calculator() {
 					handlerEqual={handlerEqual}
 					clearAll={clearAll}
 					clearCurrentNumer={clearCurrentNumer}
-                    handlerDot={handlerDot}
+					handlerDot={handlerDot}
 				/>
 			</div>
 		</div>
