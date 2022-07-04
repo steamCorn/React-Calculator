@@ -1,8 +1,6 @@
 import React from 'react';
-import {showSing} from '../utils/counterUtils';
 
 export default function DisplayCalc(props) {
-    let operand = showSing(props.operand);
     let topDisplay;
     let bottomDisplay;
 
@@ -13,13 +11,13 @@ export default function DisplayCalc(props) {
         topDisplay = `${props.result} = `;
         bottomDisplay = `${props.currentNum}`;
     } else if (props.isEqualPressed) {
-        topDisplay = `${props.previousNum} ${operand} ${props.currentNum} = `;
+        topDisplay = `${props.previousNum} ${props.operand} ${props.currentNum} = `;
         bottomDisplay = `${props.result}`;
     } else if (props.result && !props.currentNum) {
-        topDisplay = `${props.result} ${operand}`;
+        topDisplay = `${props.result} ${props.operand}`;
         bottomDisplay = `${props.result}`;
     } else {
-        topDisplay = `${props.previousNum} ${operand}`;
+        topDisplay = `${props.previousNum} ${props.operand}`;
         bottomDisplay = `${props.currentNum}`;
     }
 

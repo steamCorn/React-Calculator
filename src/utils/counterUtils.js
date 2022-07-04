@@ -9,10 +9,10 @@ function calculateResult(a, b, mathOperand) {
         case '-':
             total = A - B;
             break;
-        case '*':
+        case '×':
             total = A * B;
             break;
-        case '/':
+        case '÷':
             total = A / B;
             break;
         default:
@@ -21,19 +21,4 @@ function calculateResult(a, b, mathOperand) {
     return total;
 }
 
-function showSing (mathOperand) {
-    let sign;
-    switch (mathOperand) {
-        case '*':
-            sign = "×";
-            break;
-        case '/':
-            sign = "÷";
-            break;
-        default:
-            sign = mathOperand;
-    } 
-    return sign;
-}
-
-export { calculateResult, showSing };
+export { calculateResult };

@@ -6,16 +6,16 @@ function ButtonsPad(props) {
             <button id="clear" value="C" onClick={props.clearAll}>
                 C
             </button>
-            {/* <button id="clear-element" value="CE" onClick={props.clearCurrentNumer}>
+            <button id="clear-element" value="CE" onClick={props.clearCurrentNumer}>
                 CE
-            </button> */}
+            </button>
             <button id="percent" value="negative" onClick={props.handleNegativeSign}>
                 +/- 
             </button>
-            <button id="percent" value="%" onClick={props.handlerOperands}>
+            {/* <button id="percent" value="%" onClick={props.handlerOperands}>
                 ٪ 
-            </button>
-            <button id="divide" value="/" onClick={props.handlerOperands}>
+            </button> */}
+            <button id="divide" value="÷" onClick={props.handlerOperands}>
                 ÷
             </button>
 
@@ -28,7 +28,7 @@ function ButtonsPad(props) {
             <button id="nine" value="9" onClick={props.handlerPressButton}>
                 9
             </button>
-            <button id="multiply" value="*" onClick={props.handlerOperands}>
+            <button id="multiply" value="×" onClick={props.handlerOperands}>
                 ×
             </button>
             <button id="four" value="4" onClick={props.handlerPressButton}>

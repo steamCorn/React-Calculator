@@ -37,8 +37,6 @@ function Calculator() {
 
     const zeroButtonClickHandler = (digit) => {
 
-
-
         if (currentNum === 0 || currentNum === '0') {
             console.log('condition 1.1')
             return setCurrentNum(digit);
@@ -47,7 +45,6 @@ function Calculator() {
             console.log('condition 1.2')
             return setCurrentNum(currentNum + digit);
         }
-        // strange behavior becouse => setIsOperatorPressed(false);
         else if (isOperatorPressed) {
             console.log('condition 1.3')
             setIsOperatorPressed(false);
@@ -101,16 +98,10 @@ function Calculator() {
             setPreviousNum(result);
             setResult(result);
         } 
-        else if (e.target.value === '%') {
-            console.log('condition 3.2')
-            setIsOperatorPressed(true);
-            setCurrentNum(currentNum * 0.01);
-        } 
         else if (isOperatorPressed) {
             console.log('condition 3.5')
             setOperand(symbol);
         } 
-
         else if (!operand) {
             console.log('condition 3.7')
             setIsOperatorPressed(true);
@@ -159,16 +150,18 @@ function Calculator() {
             setIsEqualPressed(true);
             setResult(currentNum);
         }
-        else if (!result && previousNum) {
-            console.log('condition 5.3')
-            setIsEqualPressed(true);
-            setOperand(operand);
-            setResult(calculateResult(previousNum, currentNum, operand));
-        } else if (isEqualPressed) {
+        // else if (!result && previousNum) {
+        //     console.log('condition 5.3')
+        //     setIsEqualPressed(true);
+        //     setOperand(operand);
+        //     setResult(calculateResult(previousNum, currentNum, operand));
+        // } 
+        else if (isEqualPressed) {
             console.log('condition 5.4')
             setPreviousNum(result);
             setResult(calculateResult(result, currentNum, operand));
-        } else {
+        } 
+        else {
             console.log('condition 5.5')
             setIsEqualPressed(true);
             setResult(calculateResult(previousNum, currentNum, operand));
