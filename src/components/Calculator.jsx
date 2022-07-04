@@ -16,7 +16,7 @@ function Calculator() {
     const [operand, setOperand] = useState('');
     const [isEqualPressed, setIsEqualPressed] = useState(false);
     const [isOperatorPressed, setIsOperatorPressed] = useState(false);
-    const [isNegativePressed, setNegative] = useState(false);
+
 
     const [theme, setTheme] = useState("light");
 
@@ -27,7 +27,6 @@ function Calculator() {
         setOperand('');
         setIsEqualPressed(false);
         setIsOperatorPressed(false);
-        setNegative(false);
     };
 
     const clearCurrentNumer = () => {
@@ -37,6 +36,9 @@ function Calculator() {
     };
 
     const zeroButtonClickHandler = (digit) => {
+
+
+
         if (currentNum === 0 || currentNum === '0') {
             console.log('condition 1.1')
             return setCurrentNum(digit);
@@ -45,6 +47,7 @@ function Calculator() {
             console.log('condition 1.2')
             return setCurrentNum(currentNum + digit);
         }
+        // strange behavior becouse => setIsOperatorPressed(false);
         else if (isOperatorPressed) {
             console.log('condition 1.3')
             setIsOperatorPressed(false);
@@ -65,7 +68,8 @@ function Calculator() {
         const digit = e.target.value;
         if (digit === '0') {
             zeroButtonClickHandler(digit);
-        } else if (isEqualPressed) {
+        } 
+        else if (isEqualPressed) {
             console.log('condition 2.1')
             clearAll();
             setCurrentNum(digit);
@@ -86,12 +90,14 @@ function Calculator() {
     };
 
     const handlerOperands = (e) => {
+        const symbol = e.target.value;
+
         if (isEqualPressed) {
             console.log('condition 3.1')
             setIsOperatorPressed(true);
             setIsEqualPressed(false);
             setCurrentNum(0);
-            setOperand(e.target.value);
+            setOperand(symbol);
             setPreviousNum(result);
             setResult(result);
         } 
@@ -101,47 +107,21 @@ function Calculator() {
             setCurrentNum(currentNum * 0.01);
         } 
         else if (isOperatorPressed) {
-            let isNegativeSign = e.target.value === '-';
-            let isPositive = e.target.value === '+';
-            let isOperandMultiplyOrDevide = operand === '*' || operand === '/';
+            console.log('condition 3.5')
+            setOperand(symbol);
+        } 
 
-            if (isNegativeSign && isOperandMultiplyOrDevide) {
-                console.log('condition 3.3')
-                setOperand(operand);
-                setNegative(true);
-            } 
-            else if (isPositive) {
-                console.log('condition 3.4')
-                setNegative(false);
-                setOperand(e.target.value);
-            } 
-            else {
-                console.log('condition 3.5')
-                setOperand(e.target.value);
-            }
-        } 
-        else if (isNegativePressed) {
-            console.log('condition 3.6')
-            setIsOperatorPressed(true);
-            setOperand(e.target.value);
-            setNegative(false);
-            setResult(calculateResult(previousNum, '-' + currentNum, operand));
-            setPreviousNum(
-                calculateResult(previousNum, '-' + currentNum, operand),
-            );
-            setCurrentNum(0);
-        } 
         else if (!operand) {
             console.log('condition 3.7')
             setIsOperatorPressed(true);
-            setOperand(e.target.value);
+            setOperand(symbol);
             setPreviousNum(currentNum);
             setCurrentNum(currentNum);
         } 
         else {
             console.log('condition 3.8')
             setIsOperatorPressed(true);
-            setOperand(e.target.value);
+            setOperand(symbol);
             setResult(calculateResult(previousNum, currentNum, operand));
             setPreviousNum(calculateResult(previousNum, currentNum, operand));
             setCurrentNum(0);
@@ -149,7 +129,7 @@ function Calculator() {
     };
 
     const handlerDot = () => {
-        if (currentNum == 0) {
+        if (currentNum === 0) {
             console.log('condition 4.1')
             setCurrentNum('0.');
         }
@@ -178,13 +158,8 @@ function Calculator() {
             console.log('condition 5.1')
             setIsEqualPressed(true);
             setResult(currentNum);
-        } else if (isNegativePressed) {
-            console.log('condition 5.2')
-            setIsEqualPressed(true);
-            setNegative(false);
-            setResult(calculateResult(previousNum, '-' + currentNum, operand));
-            setCurrentNum('-' + currentNum);
-        } else if (!result && previousNum) {
+        }
+        else if (!result && previousNum) {
             console.log('condition 5.3')
             setIsEqualPressed(true);
             setOperand(operand);
@@ -199,6 +174,22 @@ function Calculator() {
             setResult(calculateResult(previousNum, currentNum, operand));
         }
     };
+
+    const handleNegativeSign = () => {
+        if(currentNum > 0){
+            console.log('condition 6.1')
+            setCurrentNum('-' + currentNum);
+        }
+        else if (currentNum < 0){
+            console.log('condition 6.2')
+            let newCurNum = currentNum.slice(1, currentNum.toString().length);
+            setCurrentNum(newCurNum);
+        }
+        else {
+            console.log('condition 6.3')
+            return false;
+        }
+    }
 
     const toggelTheme = () => {
         setTheme((currTheme) => (currTheme === "light" ? "dark" : "light"));
@@ -228,6 +219,7 @@ function Calculator() {
                 clearAll={clearAll}
                 clearCurrentNumer={clearCurrentNumer}
                 handlerDot={handlerDot}
+                handleNegativeSign = {handleNegativeSign}
             />
         </div>
     );
