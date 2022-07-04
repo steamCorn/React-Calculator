@@ -3,34 +3,19 @@ import React from 'react';
 function ButtonsPad(props) {
     return (
         <div className="buttons-pad-calculator button-grid">
-            {/* <div className="operators"></div> */}
-            <button id="add" value="+" onClick={props.handlerOperands}>
-                +
-            </button>
-            <button id="subtract" value="-" onClick={props.handlerOperands}>
-                -
-            </button>
-            <button id="multiply" value="*" onClick={props.handlerOperands}>
-                *
-            </button>
-            <button id="divide" value="/" onClick={props.handlerOperands}>
-                /
-            </button>
-            <button id="percent" value="%" onClick={props.handlerOperands}>
-                %
-            </button>
             <button id="clear" value="C" onClick={props.clearAll}>
                 C
             </button>
-            <button
-                id="clear-element"
-                value="CE"
-                onClick={props.clearCurrentNumer}
-            >
+            <button id="clear-element" value="CE" onClick={props.clearCurrentNumer}>
                 CE
             </button>
+            <button id="percent" value="%" onClick={props.handlerOperands}>
+                ٪ 
+            </button>
+            <button id="divide" value="/" onClick={props.handlerOperands}>
+                ÷
+            </button>
 
-            {/* <div className="digits"></div> */}
             <button id="seven" value="7" onClick={props.handlerPressButton}>
                 7
             </button>
@@ -39,6 +24,9 @@ function ButtonsPad(props) {
             </button>
             <button id="nine" value="9" onClick={props.handlerPressButton}>
                 9
+            </button>
+            <button id="multiply" value="*" onClick={props.handlerOperands}>
+                ×
             </button>
             <button id="four" value="4" onClick={props.handlerPressButton}>
                 4
@@ -49,6 +37,9 @@ function ButtonsPad(props) {
             <button id="six" value="6" onClick={props.handlerPressButton}>
                 6
             </button>
+            <button id="subtract" value="-" onClick={props.handlerOperands}>
+                -
+            </button>
             <button id="one" value="1" onClick={props.handlerPressButton}>
                 1
             </button>
@@ -58,12 +49,14 @@ function ButtonsPad(props) {
             <button id="three" value="3" onClick={props.handlerPressButton}>
                 3
             </button>
-            <button id="decimal" value="." onClick={props.handlerDot}>
-                .
+            <button className='grid-row-span-2' id="add" value="+" onClick={props.handlerOperands}>
+                +
             </button>
-
             <button id="zero" value="0" onClick={props.handlerPressButton}>
                 0
+            </button>
+            <button id="decimal" value="." onClick={props.handlerDot}>
+                .
             </button>
             <button id="equals" value="=" onClick={props.handlerEqual}>
                 =

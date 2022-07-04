@@ -1,33 +1,33 @@
 import React from 'react';
+import {showSing} from '../utils/counterUtils';
 
 export default function DisplayCalc(props) {
+    let operand = showSing(props.operand);
     let topDisplay;
     let bottomDisplay;
 
-    if (!props.result && !props.isEqual && !props.operand) {
+    if (!props.result && !props.isEqualPressed && !props.operand) {
         topDisplay = false;
         bottomDisplay = `${props.currentNum}` || `${props.result}`;
-    } else if (props.isEqual && !props.operand) {
+    } else if (props.isEqualPressed && !props.operand) {
         topDisplay = `${props.result} = `;
         bottomDisplay = `${props.currentNum}`;
-    } else if (props.isEqual) {
-        topDisplay = `${props.previousNum} ${props.operand} ${props.currentNum} = `;
+    } else if (props.isEqualPressed) {
+        topDisplay = `${props.previousNum} ${operand} ${props.currentNum} = `;
         bottomDisplay = `${props.result}`;
     } else if (props.result && !props.currentNum) {
-        topDisplay = `${props.result} ${props.operand}`;
+        topDisplay = `${props.result} ${operand}`;
         bottomDisplay = `${props.result}`;
     } else {
-        topDisplay = `${props.previousNum} ${props.operand}`;
+        topDisplay = `${props.previousNum} ${operand}`;
         bottomDisplay = `${props.currentNum}`;
     }
 
     return (
         <div>
-            <div className="whole-display">
-                <div className="calculations">{topDisplay}</div>
-                <div className="results" id="display">
-                    {bottomDisplay}
-                </div>
+            <div className="display">
+                <div className="formula">{topDisplay}</div>
+                <div className="results">{bottomDisplay}</div>
             </div>
         </div>
     );

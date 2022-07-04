@@ -21,4 +21,19 @@ function calculateResult(a, b, mathOperand) {
     return total;
 }
 
-export default calculateResult;
+function showSing (mathOperand) {
+    let sign;
+    switch (mathOperand) {
+        case '*':
+            sign = "×";
+            break;
+        case '/':
+            sign = "÷";
+            break;
+        default:
+            sign = mathOperand;
+    } 
+    return sign;
+}
+
+export { calculateResult, showSing };
