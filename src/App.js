@@ -15,8 +15,8 @@ function App() {
     //         <div className="wrapper-calculator" id={theme}>
     //             <Calculator />
     //         </div>
-    //     </ThemeContext> 
-        
+    //     </ThemeContext>
+
     // );
 
     return (

@@ -6,11 +6,19 @@ function ButtonsPad(props) {
             <button id="clear" value="C" onClick={props.clearAll}>
                 C
             </button>
-            <button id="clear-element" value="CE" onClick={props.clearCurrentNumer}>
+            <button
+                id="clear-element"
+                value="CE"
+                onClick={props.clearCurrentNumer}
+            >
                 CE
             </button>
-            <button id="percent" value="negative" onClick={props.handleNegativeSign}>
-                +/- 
+            <button
+                id="percent"
+                value="negative"
+                onClick={props.handleNegativeSign}
+            >
+                +/-
             </button>
             {/* <button id="percent" value="%" onClick={props.handlerOperands}>
                 ٪ 
@@ -52,7 +60,12 @@ function ButtonsPad(props) {
             <button id="three" value="3" onClick={props.handlerPressButton}>
                 3
             </button>
-            <button className='grid-row-span-2' id="add" value="+" onClick={props.handlerOperands}>
+            <button
+                className="grid-row-span-2"
+                id="add"
+                value="+"
+                onClick={props.handlerOperands}
+            >
                 +
             </button>
             <button id="zero" value="0" onClick={props.handlerPressButton}>
