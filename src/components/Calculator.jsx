@@ -17,7 +17,6 @@ function Calculator() {
     const [isEqualPressed, setIsEqualPressed] = useState(false);
     const [isOperatorPressed, setIsOperatorPressed] = useState(false);
 
-
     const [theme, setTheme] = useState("light");
 
     const clearAll = () => {
@@ -96,7 +95,9 @@ function Calculator() {
             setCurrentNum(0);
             setOperand(symbol);
             setPreviousNum(result);
-            setResult(result);
+
+            //check
+            // setResult(result);
         } 
         else if (isOperatorPressed) {
             console.log('condition 3.5')
@@ -145,24 +146,18 @@ function Calculator() {
     };
 
     const handlerEqual = () => {
-        if (previousNum === 0 && !operand) {
+        if (previousNum === 0 && !isOperatorPressed) {
             console.log('condition 5.1')
             setIsEqualPressed(true);
             setResult(currentNum);
         }
-        // else if (!result && previousNum) {
-        //     console.log('condition 5.3')
-        //     setIsEqualPressed(true);
-        //     setOperand(operand);
-        //     setResult(calculateResult(previousNum, currentNum, operand));
-        // } 
         else if (isEqualPressed) {
-            console.log('condition 5.4')
+            console.log('condition 5.2')
             setPreviousNum(result);
             setResult(calculateResult(result, currentNum, operand));
         } 
         else {
-            console.log('condition 5.5')
+            console.log('condition 5.3')
             setIsEqualPressed(true);
             setResult(calculateResult(previousNum, currentNum, operand));
         }
