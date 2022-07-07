@@ -20,9 +20,6 @@ function ButtonsPad(props) {
             >
                 +/-
             </button>
-            {/* <button id="percent" value="%" onClick={props.handlerOperands}>
-                ٪ 
-            </button> */}
             <button id="divide" value="÷" onClick={props.handlerOperands}>
                 ÷
             </button>

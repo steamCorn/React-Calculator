@@ -87,8 +87,6 @@ function Calculator() {
             setOperand(symbol);
             setPreviousNum(result);
 
-            //check
-            // setResult(result);
         } else if (isOperatorPressed) {
             console.log('condition 3.5');
             setOperand(symbol);
