@@ -55,11 +55,17 @@ function Calculator() {
         }
     };
 
+    const maxDigitWarning = () => {
+        setCurrentNum(currentNum);
+    };
+
+    console.log('length of currentNum:   ' + currentNum.toString().length);
+
     const handlerPressButton = (e) => {
         const digit = e.target.value;
-        if (digit === '0') {
-            zeroButtonClickHandler(digit);
-        } else if (isEqualPressed) {
+        const maxDisplaylength = 11; //for font-size 2rem
+
+        if (isEqualPressed) {
             console.log('condition 2.1');
             clearAll();
             setCurrentNum(digit);
@@ -67,12 +73,19 @@ function Calculator() {
             console.log('condition 2.2');
             setIsOperatorPressed(false);
             setCurrentNum(digit);
-        } else if (currentNum === 0 || currentNum === '0') {
-            console.log('condition 2.3');
-            setCurrentNum(digit);
+        } else if (currentNum.toString().length <= maxDisplaylength) {
+            if (digit === '0') {
+                zeroButtonClickHandler(digit);
+            } else if (currentNum === 0 || currentNum === '0') {
+                console.log('condition 2.3');
+                setCurrentNum(digit);
+            } else {
+                console.log('condition 2.4');
+                setCurrentNum(currentNum + digit);
+            }
         } else {
-            console.log('condition 2.4');
-            setCurrentNum(currentNum + digit);
+            console.log('maxDigitWarning!');
+            maxDigitWarning();
         }
     };
 
@@ -86,7 +99,6 @@ function Calculator() {
             setCurrentNum(0);
             setOperand(symbol);
             setPreviousNum(result);
-
         } else if (isOperatorPressed) {
             console.log('condition 3.5');
             setOperand(symbol);
