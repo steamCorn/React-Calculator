@@ -4,10 +4,8 @@ React-Calculator is a simple single page web application which can calculate usi
 The React-Calculator was building without using the **.eval()** function
 This application was created as part of the Front End Development Libraries course.
 
-<img src="/src/file/dark.png" width="570" height="500">
-<img src="/src/file/light.png" width="570" height="500">
-<!-- ![light theme](https://user-images.githubusercontent.com/64536303/177770599-cefeb69e-1188-4603-be9a-f7f8f55f280b.png)
-![dark theme](https://user-images.githubusercontent.com/64536303/177770605-209d2f07-ead2-452b-8f05-b5af614ef47a.png) -->
+<img src="/src/files/dark.png" alt="Dark theme" width="570" height="500">
+<img src="/src/files/light.png" alt="Light theme" width="570" height="500">
 
 ## What is the use of this Repo
 
